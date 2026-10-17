@@ -1,0 +1,106 @@
+:root {
+  --felt-green: #0d4b29;
+  --felt-dark: #062915;
+  --felt-light: #166a3b;
+  --rail-wood: #231006;
+  --rail-leather: #3d1d0d;
+  --gold-accent: #f59e0b;
+  --gold-bright: #fbbf24;
+  --gold-glow: rgba(251, 191, 36, 0.45);
+  --dark-bg: #07090e;
+  --card-width: 72px;
+  --card-height: 102px;
+  --chip-size: 36px;
+  --font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  font-family: var(--font-family);
+  background: radial-gradient(ellipse at 50% 45%, #161d31 0%, #090b12 70%, #05060a 100%);
+  color: #f1f3f5;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Header bar */
+.casino-header {
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  background: linear-gradient(180deg, rgba(17, 22, 37, 0.94) 0%, rgba(9, 11, 18, 0.96) 100%);
+  border-bottom: 1px solid rgba(251, 191, 36, 0.22);
+  z-index: 50;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+}
+
+.casino-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: var(--gold-bright);
+  text-shadow: 0 0 12px var(--gold-glow);
+}
+
+.brand-crown {
+  font-size: 19px;
+}
+
+.header-status {
+  font-size: 13px;
+  color: #94a3b8;
+  display: flex;
+  gap: 20px;
+}
+
+.header-status span strong {
+  color: #f8fafc;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #e2e8f0;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--gold-bright);
+  color: #fff;
+}

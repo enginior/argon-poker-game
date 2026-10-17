@@ -1,0 +1,476 @@
+/* Poker Table & Wide Casino Felt Arena */
+
+.table-arena {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  overflow: hidden;
+  padding: 12px 20px;
+}
+
+/* The Grand Wide-Screen Oval Poker Table */
+.poker-table-outer {
+  position: relative;
+  width: 96vw;
+  max-width: 1560px;
+  height: 80vh;
+  max-height: 670px;
+  min-height: 480px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 50% 35%, #4a2210 0%, var(--rail-leather) 45%, var(--rail-wood) 100%);
+  padding: 26px;
+  box-shadow: 
+    0 35px 70px rgba(0, 0, 0, 0.9),
+    0 12px 28px rgba(0, 0, 0, 0.7),
+    inset 0 3px 6px rgba(255, 255, 255, 0.18),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.85);
+  border: 3px solid #160a04;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gold Bezel Track */
+.table-gold-bezel {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  padding: 5px;
+  background: linear-gradient(135deg, #d4af37 0%, #9a740a 35%, #fef08a 55%, #b48608 80%, #facc15 100%);
+  box-shadow: 
+    0 0 14px rgba(212, 175, 55, 0.35),
+    inset 0 2px 6px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* High Speed Emerald Casino Felt */
+.table-felt {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  background: 
+    radial-gradient(ellipse at 50% 48%, #197843 0%, var(--felt-green) 58%, var(--felt-dark) 100%);
+  position: relative;
+  box-shadow: 
+    inset 0 0 65px rgba(0, 0, 0, 0.75),
+    inset 0 0 20px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Casino Inner Betting Line */
+.table-felt::before {
+  content: '';
+  position: absolute;
+  width: 82%;
+  height: 70%;
+  border-radius: 999px;
+  border: 2px dashed rgba(251, 191, 36, 0.28);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+
+/* Subtle table logo watermark */
+.table-watermark {
+  position: absolute;
+  top: 28%;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 7px;
+  color: rgba(251, 191, 36, 0.1);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* Dealer Shoe / Deck Area (Offset to Top-Left Dealer Position so Top Seat is unobstructed) */
+.dealer-shoe-area {
+  position: absolute;
+  top: 22px;
+  left: 27%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+}
+
+.dealer-shoe {
+  width: 58px;
+  height: 82px;
+  background: linear-gradient(145deg, #2b170c 0%, #120803 100%);
+  border: 2px solid var(--gold-bright);
+  border-radius: 8px;
+  box-shadow: 
+    0 8px 18px rgba(0, 0, 0, 0.65),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dealer-shoe::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 4px;
+  background: #881337;
+  border: 1px solid rgba(251, 191, 36, 0.6);
+  box-shadow: 0 2px 0 #e2e8f0, 0 4px 0 #cbd5e1;
+}
+
+.dealer-shoe::after {
+  content: '♠ DECK ♠';
+  position: relative;
+  z-index: 2;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--gold-bright);
+  font-weight: 900;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Center Board: Community Cards + Pot */
+.center-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 15;
+}
+
+.pot-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(8, 12, 22, 0.78);
+  backdrop-filter: blur(6px);
+  padding: 5px 22px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(251, 191, 36, 0.65);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55), 0 0 15px rgba(251, 191, 36, 0.2);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pot-display.pot-bump {
+  transform: scale(1.1);
+}
+
+.pot-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #cbd5e1;
+}
+
+.pot-amount {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--gold-bright);
+  text-shadow: 0 0 10px var(--gold-glow);
+}
+
+/* Community Cards Container */
+.community-cards-container {
+  display: flex;
+  gap: 12px;
+  min-height: calc(var(--card-height) + 8px);
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.community-card-slot {
+  width: var(--card-width);
+  height: var(--card-height);
+  border: 1.5px dashed rgba(255, 255, 255, 0.18);
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* Player Seats (Horizontal Side-by-Side Capsule Layout for Clean Vertical Space) */
+.player-seat {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  z-index: 25;
+  transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+}
+
+/* Seat Positions around the Wide Oval */
+.seat-0 { /* Human: Bottom Center */
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.seat-1 { /* AI Viktor: Far Left Center */
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.seat-2 { /* AI Sarah: Top Center */
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.seat-3 { /* AI Leo: Far Right Center */
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: row-reverse;
+}
+
+/* Player Card Holder */
+.seat-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: calc(var(--card-width) * 2 - 14px);
+  min-height: var(--card-height);
+  perspective: 900px;
+}
+
+/* Seat Profile Badge */
+.seat-badge {
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.96) 0%, rgba(15, 23, 42, 0.98) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  padding: 8px 14px;
+  min-width: 132px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.65);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Active Turn Glow */
+.player-seat.active-turn .seat-badge {
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 22px var(--gold-bright), 0 0 40px var(--gold-glow);
+  animation: pulse-turn 1.5s infinite;
+}
+
+@keyframes pulse-turn {
+  0%, 100% {
+    box-shadow: 0 0 16px var(--gold-bright);
+  }
+  50% {
+    box-shadow: 0 0 28px #fde047, 0 0 45px var(--gold-glow);
+  }
+}
+
+.player-avatar {
+  font-size: 24px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+.player-name {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #f8fafc;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-chips-count {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--gold-bright);
+  margin-top: 1px;
+}
+
+/* Thinking Indicator Bubble */
+.thinking-bubble {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--gold-bright);
+  color: #f1f5f9;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: all 0.25s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 30;
+}
+
+.thinking-bubble.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.thinking-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--gold-bright);
+  border-radius: 50%;
+  animation: blink-dot 1s infinite;
+}
+
+.thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+.thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink-dot {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* Action Status Label (Folded, Check, Call, Raise) */
+.seat-action-tag {
+  position: absolute;
+  bottom: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #334155;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 2px 9px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  white-space: nowrap;
+  display: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+.seat-action-tag.show {
+  display: block;
+  animation: pop-tag 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes pop-tag {
+  from { transform: translateX(-50%) scale(0.7); opacity: 0; }
+  to { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+.seat-action-tag.tag-fold { background: #ef4444; }
+.seat-action-tag.tag-check { background: #3b82f6; }
+.seat-action-tag.tag-call { background: #10b981; }
+.seat-action-tag.tag-raise { background: #f59e0b; color: #090a0f; }
+.seat-action-tag.tag-allin { background: #dc2626; color: #fff; animation: pulse-tag 1s infinite; }
+
+@keyframes pulse-tag {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.08); }
+}
+
+/* Folded Player Dimming */
+.player-seat.is-folded {
+  opacity: 0.45;
+  filter: grayscale(0.65);
+}
+
+/* Seat Bet Chips Tray Area on Felt */
+.seat-bet-tray {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  min-height: 56px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(251, 191, 36, 0.32);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.25) 0%, transparent 72%);
+  z-index: 22;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.seat-bet-tray.has-bet {
+  border-color: rgba(251, 191, 36, 0.75);
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.14) 0%, rgba(0, 0, 0, 0.32) 75%);
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.28);
+}
+
+/* Position Bet Trays cleanly inside the oval felt ring */
+.seat-0 .seat-bet-tray {
+  top: -66px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.seat-1 .seat-bet-tray {
+  right: -84px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.seat-2 .seat-bet-tray {
+  bottom: -66px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.seat-3 .seat-bet-tray {
+  left: -84px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bet-badge {
+  margin-top: 3px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--gold-bright);
+  color: var(--gold-bright);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 1px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.65);
+}
+
+/* Dealer Button ('D') */
+.dealer-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fef08a 0%, #f59e0b 65%, #b45309 100%);
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.9);
+  color: #09090b;
+  font-weight: 900;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 28;
+  transition: top 0.55s cubic-bezier(0.22, 1, 0.36, 1), left 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}

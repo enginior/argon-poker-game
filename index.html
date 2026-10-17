@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casino Texas Hold'em Poker</title>
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <link rel="stylesheet" href="./src/styles/table.css">
+  <link rel="stylesheet" href="./src/styles/cards.css">
+  <link rel="stylesheet" href="./src/styles/chips.css">
+  <link rel="stylesheet" href="./src/styles/controls.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header class="casino-header">
+      <div class="casino-brand">
+        <span class="brand-crown">👑</span>
+        <span>ROYAL HOLD'EM CASINO</span>
+      </div>
+      <div class="header-status">
+        <span>Table: <strong>No-Limit 4-Max</strong></span>
+        <span>Blinds: <strong>$10 / $20</strong></span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-speed" class="icon-btn" title="Toggle Game Speed">⚡ Speed: Normal</button>
+        <button id="btn-sound" class="icon-btn" title="Toggle Sound">🔊 Sound: ON</button>
+      </div>
+    </header>
+
+    <!-- Table Arena -->
+    <main class="table-arena">
+      <div id="poker-table" class="poker-table-outer">
+        <div class="table-gold-bezel">
+          <div class="table-felt">
+            <div class="table-watermark">NO LIMIT TEXAS HOLD'EM</div>
+
+            <!-- Dealer Shoe -->
+            <div class="dealer-shoe-area">
+              <div id="dealer-shoe" class="dealer-shoe"></div>
+            </div>
+
+            <!-- Dealer Button -->
+            <div id="dealer-button" class="dealer-button">D</div>
+
+            <!-- Center Board: Pot & Community Cards -->
+            <div class="center-board">
+              <div id="pot-display" class="pot-display">
+                <span class="pot-label">Main Pot</span>
+                <span id="pot-amount" class="pot-amount">$0</span>
+              </div>
+              <div id="community-cards" class="community-cards-container">
+                <div id="comm-slot-0" class="community-card-slot"></div>
+                <div id="comm-slot-1" class="community-card-slot"></div>
+                <div id="comm-slot-2" class="community-card-slot"></div>
+                <div id="comm-slot-3" class="community-card-slot"></div>
+                <div id="comm-slot-4" class="community-card-slot"></div>
+              </div>
+            </div>
+
+            <!-- Seat 0: Human Player (Bottom) -->
+            <div id="seat-0" class="player-seat seat-0">
+              <div class="seat-bet-tray"></div>
+              <div class="seat-badge">
+                <span class="player-avatar">🤠</span>
+                <span class="player-name">You</span>
+                <span class="player-chips-count">$1,000</span>
+                <div class="seat-action-tag"></div>
+              </div>
+              <div id="seat-cards-0" class="seat-cards">
+                <div id="seat-0-card-0" class="seat-card-slot"></div>
+                <div id="seat-0-card-1" class="seat-card-slot"></div>
+              </div>
+            </div>
+
+            <!-- Seat 1: AI Viktor (Left) -->
+            <div id="seat-1" class="player-seat seat-1">
+              <div class="thinking-bubble">
+                <span>Thinking</span>
+                <span class="thinking-dot"></span>
+                <span class="thinking-dot"></span>
+                <span class="thinking-dot"></span>
+              </div>
+              <div class="seat-badge">
+                <span class="player-avatar">🦈</span>
+                <span class="player-name">Viktor</span>
+                <span class="player-chips-count">$1,000</span>
+                <div class="seat-action-tag"></div>
+              </div>
+              <div id="seat-cards-1" class="seat-cards">
+                <div id="seat-1-card-0" class="seat-card-slot"></div>
+                <div id="seat-1-card-1" class="seat-card-slot"></div>
+              </div>
+              <div class="seat-bet-tray"></div>
+            </div>
+
+            <!-- Seat 2: AI Sarah (Top) -->
+            <div id="seat-2" class="player-seat seat-2">
+              <div class="thinking-bubble">
+                <span>Thinking</span>
+                <span class="thinking-dot"></span>
+                <span class="thinking-dot"></span>
+                <span class="thinking-dot"></span>
+              </div>
+              <div class="seat-bet-tray"></div>
+              <div class="seat-badge">
+                <span class="player-avatar">💎</span>
+                <span class="player-name">Sarah</span>
+                <span class="player-chips-count">$1,000</span>
+                <div class="seat-action-tag"></div>
+              </div>
+              <div id="seat-cards-2" class="seat-cards">
+                <div id="seat-2-card-0" class="seat-card-slot"></div>
+                <div id="seat-2-card-1" class="seat-card-slot"></div>
+              </div>
+            </div>
+
+            <!-- Seat 3: AI Leo (Right) -->
+            <div id="seat-3" class="player-seat seat-3">
+              <div class="thinking-bubble">
+                <span>Thinking</span>
+                <span class="thinking-dot"></span>
+                <span class="thinking-dot"></span>
+                <span class="thinking-dot"></span>
+              </div>
+              <div class="seat-bet-tray"></div>
+              <div class="seat-badge">
+                <span class="player-avatar">🦁</span>
+                <span class="player-name">Leo</span>
+                <span class="player-chips-count">$1,000</span>
+                <div class="seat-action-tag"></div>
+              </div>
+              <div id="seat-cards-3" class="seat-cards">
+                <div id="seat-3-card-0" class="seat-card-slot"></div>
+                <div id="seat-3-card-1" class="seat-card-slot"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Action Log Drawer -->
+    <div id="game-log-panel" class="game-log-panel">
+      <div class="log-header">
+        <span>Dealer Log</span>
+        <span style="cursor:pointer;" id="btn-clear-log">Clear</span>
+      </div>
+      <div id="log-messages" class="log-messages"></div>
+    </div>
+
+    <!-- Player Controls HUD -->
+    <footer class="player-hud">
+      <!-- Live Hand Strength Advice -->
+      <div class="hud-hand-info">
+        <span class="hand-strength-label">Your Hand</span>
+        <span id="hand-strength-value" class="hand-strength-value">Click Deal to start</span>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="hud-action-buttons">
+        <button id="btn-deal-hand" class="btn-deal-hand">DEAL HAND</button>
+
+        <button id="btn-fold" class="action-btn btn-fold" disabled>
+          <span>FOLD</span>
+        </button>
+
+        <button id="btn-check-call" class="action-btn btn-check-call" disabled>
+          <span>CHECK</span>
+          <span class="sub-text">FREE</span>
+        </button>
+
+        <button id="btn-raise" class="action-btn btn-raise" disabled>
+          <span>RAISE</span>
+          <span class="sub-text">$40</span>
+        </button>
+      </div>
+
+      <!-- Raise Controls -->
+      <div class="hud-raise-controls">
+        <div class="raise-slider-row">
+          <input type="range" id="raise-slider" class="raise-slider" min="20" max="1000" step="10" value="40" disabled>
+          <span id="raise-amount-badge" class="raise-amount-badge">$40</span>
+        </div>
+        <div class="quick-bet-presets">
+          <button class="preset-pill" data-preset="min" disabled>Min</button>
+          <button class="preset-pill" data-preset="2.5bb" disabled>2.5x</button>
+          <button class="preset-pill" data-preset="half-pot" disabled>1/2 Pot</button>
+          <button class="preset-pill" data-preset="pot" disabled>Pot</button>
+          <button class="preset-pill" data-preset="max" disabled>Max</button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

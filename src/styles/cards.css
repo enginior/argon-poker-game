@@ -1,0 +1,325 @@
+/* Luxury Casino Playing Cards & 3D Flip Animations */
+
+.playing-card {
+  width: var(--card-width);
+  height: var(--card-height);
+  position: relative;
+  perspective: 1100px;
+  display: inline-block;
+  cursor: default;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  border-radius: 9px;
+  box-shadow: 
+    0 6px 14px rgba(0, 0, 0, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.playing-card.face-down .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front & Back Faces */
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+/* Card Front (Crisp Casino Linen Texture) */
+.card-front {
+  background: linear-gradient(160deg, #ffffff 0%, #f8fafc 65%, #f1f5f9 100%);
+  border: 1.5px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Subtle Inner Hairline Frame */
+.card-inner-border {
+  position: absolute;
+  inset: 4px;
+  border-radius: 6px;
+  pointer-events: none;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.playing-card.card-red .card-inner-border {
+  border-color: rgba(225, 29, 72, 0.14);
+}
+
+/* Explicit Red vs Black Suit Colors (fixes inheritance override) */
+.playing-card.card-red,
+.playing-card.card-red .card-front,
+.playing-card.card-red .card-rank,
+.playing-card.card-red .court-title,
+.playing-card.card-red .pip-watermark-rank {
+  color: #e11d48 !important;
+}
+
+.playing-card.card-black,
+.playing-card.card-black .card-front,
+.playing-card.card-black .card-rank,
+.playing-card.card-black .court-title,
+.playing-card.card-black .pip-watermark-rank {
+  color: #0f172a !important;
+}
+
+/* Corner Indices */
+.card-corner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  width: 18px;
+  z-index: 2;
+}
+
+.card-corner.top-left {
+  align-self: flex-start;
+}
+
+.card-corner.bottom-right {
+  align-self: flex-end;
+  transform: rotate(180deg);
+}
+
+.card-rank {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: -0.6px;
+  line-height: 1;
+}
+
+.rank-10 .card-rank {
+  font-size: 12.5px;
+  letter-spacing: -1.2px;
+}
+
+.card-suit-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.corner-suit-svg {
+  width: 11px;
+  height: 11px;
+  display: block;
+}
+
+/* Center Card Art */
+.card-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Number Cards (2-10) Center Medallion */
+.pip-center-art {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.pip-watermark-rank {
+  position: absolute;
+  font-size: 36px;
+  font-weight: 900;
+  opacity: 0.06;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.center-suit-svg {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+/* Ace Center Medallion */
+.ace-center-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ace-medallion-ring {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(217, 119, 6, 0.4);
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, transparent 72%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ace-suit-svg {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+}
+
+/* Court Cards (J, Q, K) Royal Crest */
+.court-card-art {
+  width: 40px;
+  height: 54px;
+  border: 1px solid rgba(217, 119, 6, 0.45);
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(254, 243, 199, 0.5) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(254, 243, 199, 0.5) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px;
+  position: relative;
+  box-shadow: inset 0 0 6px rgba(217, 119, 6, 0.12);
+}
+
+.court-crown-svg {
+  width: 24px;
+  height: 18px;
+  display: block;
+}
+
+.court-title {
+  font-size: 7.5px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  line-height: 1;
+}
+
+.court-pip {
+  position: absolute;
+  opacity: 0.45;
+}
+
+.court-pip.top {
+  top: 2px;
+  right: 3px;
+}
+
+.court-pip.bottom {
+  bottom: 2px;
+  left: 3px;
+  transform: rotate(180deg);
+}
+
+.court-mini-suit {
+  width: 8px;
+  height: 8px;
+  display: block;
+}
+
+/* Card Back (Luxury Royal Crimson & Gold Filigree) */
+.card-back {
+  background: #ffffff;
+  transform: rotateY(180deg);
+  border: 1.5px solid #e2e8f0;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back-pattern {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #881337;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(251, 191, 36, 0.22) 0%, transparent 65%),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0.12) 2px, transparent 0, transparent 7px),
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0.12) 2px, transparent 0, transparent 7px);
+  border: 1px solid rgba(251, 191, 36, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back-inner-frame {
+  width: 76%;
+  height: 80%;
+  border: 1px solid rgba(251, 191, 36, 0.7);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.25);
+}
+
+.card-back-emblem {
+  font-size: 16px;
+  color: #fbbf24;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Pre-sized Seat Card Slot so layout never jumps during dealing */
+.seat-card-slot {
+  width: var(--card-width);
+  height: var(--card-height);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.seat-card-slot:nth-child(1) {
+  transform: rotate(-4deg) translateY(2px);
+}
+
+.seat-card-slot:nth-child(2) {
+  margin-left: -16px;
+  transform: rotate(4deg) translateY(2px);
+}
+
+/* Human player's hole cards slightly larger & interactive hover lift */
+.seat-0 .seat-card-slot:hover {
+  transform: translateY(-6px) scale(1.04);
+  z-index: 5;
+}
+
+/* Winning Card Highlight at Showdown */
+.playing-card.winning-card .card-inner {
+  box-shadow: 
+    0 0 0 2.5px #fbbf24,
+    0 0 22px rgba(251, 191, 36, 0.85),
+    0 10px 24px rgba(0, 0, 0, 0.6);
+  animation: winning-pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes winning-pulse {
+  from {
+    transform: translateY(0) scale(1.02);
+  }
+  to {
+    transform: translateY(-8px) scale(1.07);
+  }
+}
